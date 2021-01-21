@@ -4,23 +4,18 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
+import java.util.List;
 
 @Getter
 @Setter
 @Entity
-public class Ingredient {
+public class Category {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String categoryName;
 
-    private String description;
-    private BigDecimal amount;
-
-    @ManyToOne
-    private Recipe recipe;
-
-    @OneToOne(fetch = FetchType.EAGER)
-    private UnitOfMeasure uom;
+    @ManyToMany(mappedBy = "categoryList")
+    private List<Recipe> recipes;
 }
