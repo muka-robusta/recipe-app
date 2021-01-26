@@ -1,7 +1,6 @@
 package io.github.onetwostory.recipe.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
@@ -9,8 +8,12 @@ import java.util.Set;
 
 @Getter
 @Setter
+@AllArgsConstructor
 @Entity
 public class Recipe {
+
+    public Recipe() {
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,6 +25,8 @@ public class Recipe {
     private Integer servings;
     private String source;
     private String url;
+
+    @Lob
     private String directions;
 
     // Large object field
@@ -43,5 +48,18 @@ public class Recipe {
             inverseJoinColumns = @JoinColumn(name = "category_id")
     )
     private List<Category> categoryList;
+
+    // Custom setter
+    public void setNotes(Notes notes) {
+        this.notes = notes;
+        notes.setRecipe(this);
+    }
+
+    public Recipe addIngredient(Ingredient ingredient) {
+        ingredient.setRecipe(this);
+        this.ingredients.add(ingredient);
+        return this;
+    }
+
 
 }

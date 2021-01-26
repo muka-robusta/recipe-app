@@ -1,10 +1,11 @@
 package io.github.onetwostory.recipe.controllers;
 
-import io.github.onetwostory.recipe.Services.RecipeService;
+import io.github.onetwostory.recipe.service.RecipeService;
 import io.github.onetwostory.recipe.model.Recipe;
 import io.github.onetwostory.recipe.repositories.CategoryRepository;
 import io.github.onetwostory.recipe.repositories.RecipeRepository;
 import io.github.onetwostory.recipe.repositories.UnitOfMeasureRepository;
+import io.github.onetwostory.recipe.service.RecipeService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,12 +25,7 @@ public class IndexController {
     @RequestMapping({"", "/", "/index.html", "/index"})
     public String getIndexPage(Model model) {
 
-        recipeService.addJhonDoeRecipe();
-
-        model.addAttribute("recipes", recipeService.findAll()
-                .stream()
-                .map(el -> el.getDescription())
-                .collect(Collectors.toList()));
+        model.addAttribute("recipes", recipeService.getRecipes());
 
         return "index";
     }
