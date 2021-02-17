@@ -1,12 +1,10 @@
 package io.github.onetwostory.recipe.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import javax.persistence.*;
 
-@Getter
-@Setter
+@Data
 @Entity
 public class UnitOfMeasure {
 

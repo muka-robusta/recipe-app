@@ -1,15 +1,12 @@
 package io.github.onetwostory.recipe.model;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
+@EqualsAndHashCode(exclude = {"recipe"})
 @Entity
 public class Notes {
 

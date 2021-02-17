@@ -6,6 +6,7 @@ import io.github.onetwostory.recipe.repositories.CategoryRepository;
 import io.github.onetwostory.recipe.repositories.RecipeRepository;
 import io.github.onetwostory.recipe.repositories.UnitOfMeasureRepository;
 import io.github.onetwostory.recipe.service.RecipeService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Controller
 public class IndexController {
 
