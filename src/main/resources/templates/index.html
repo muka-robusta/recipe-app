@@ -3,8 +3,23 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Recipes</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+<!--
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
+          crossorigin="anonymous"
+          th:href="@{/webjars/bootstrap/4.6.0/css/bootstrap.min.css}"
+    >
+    <script src="/webjars/jquery/1.11.1/jquery.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
+            crossorigin="anonymous" th:src="@{/webjars/bootstrap/4.6.0/js/bootstrap.min.js}"></script>
+-->
+
+    <link rel="stylesheet" href="/webjars/bootstrap/4.6.0/css/bootstrap.min.css">
+    <script src="/webjars/bootstrap/4.6.0/js/bootstrap.min.js"></script>
+
 </head>
 <body>
 
@@ -29,14 +44,18 @@
                                     <tr th:remove="all">
                                         <td th:text="${recipe.id}">123</td>
                                         <td th:text="${recipe.description}">Cake with sheet</td>
+                                        <td><a href="#">View</a></td>
                                     </tr>
                                     <tr th:remove="all">
                                         <td th:text="${recipe.id}">123</td>
                                         <td th:text="${recipe.description}">Cake with sheet</td>
+                                        <td><a href="#">View</a></td>
                                     </tr>
                                     <tr th:each="recipe : ${recipes}">
                                         <td th:text="${recipe.id}">334</td>
                                         <td th:text="${recipe.description}">Cake with sheet</td>
+                                        <td><a href="#"
+                                               th:href="@{'/recipe/show/' + ${recipe.id}}">View</a></td>
                                     </tr>
                                 </tbody>
                             </table>

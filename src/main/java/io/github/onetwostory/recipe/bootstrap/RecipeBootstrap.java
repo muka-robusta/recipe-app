@@ -53,6 +53,7 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
                 .collect(Collectors.toList());
 
         Recipe pizza = new Recipe();
+
         pizza.setPrepareTime(120);
         pizza.setCookTime(30);
         pizza.setDifficulty(Difficulty.MODERATE);
@@ -80,5 +81,6 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
     @Transactional
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
         recipeRepository.save(getRecipes().get(0));
+        final Optional<Recipe> byId = recipeRepository.findById(1L);
     }
 }
