@@ -38,6 +38,9 @@
                                     <tr>
                                         <td>Id</td>
                                         <td>Description</td>
+                                        <td>View</td>
+                                        <td>Update</td>
+                                        <td>Delete</td>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -56,6 +59,10 @@
                                         <td th:text="${recipe.description}">Cake with sheet</td>
                                         <td><a href="#"
                                                th:href="@{'/recipe/show/' + ${recipe.id}}">View</a></td>
+                                        <td><a href="#"
+                                               th:href="@{'/recipe/update/' + ${recipe.id}}">Update</a></td>
+                                        <td><a href="#"
+                                               th:href="@{'/recipe/delete/' + ${recipe.id}}">Delete</a></td>
                                     </tr>
                                 </tbody>
                             </table>

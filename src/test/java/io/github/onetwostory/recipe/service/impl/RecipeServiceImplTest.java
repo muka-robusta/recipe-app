@@ -1,5 +1,7 @@
 package io.github.onetwostory.recipe.service.impl;
 
+import io.github.onetwostory.recipe.converters.RecipeCommandToEntity;
+import io.github.onetwostory.recipe.converters.inverse.RecipeEntityToCommand;
 import io.github.onetwostory.recipe.model.Recipe;
 import io.github.onetwostory.recipe.repositories.RecipeRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -23,12 +25,18 @@ class RecipeServiceImplTest {
     RecipeServiceImpl recipeService;
 
     @Mock
+    RecipeCommandToEntity recipeConverter;
+
+    @Mock
+    RecipeEntityToCommand recipeConverterInverse;
+
+    @Mock
     RecipeRepository recipeRepository;
 
     @BeforeEach
     void setUp() {
         MockitoAnnotations.initMocks(this);
-        recipeService = new RecipeServiceImpl(recipeRepository);
+        recipeService = new RecipeServiceImpl(recipeRepository, recipeConverter, recipeConverterInverse);
     }
 
     @Test
@@ -63,4 +71,13 @@ class RecipeServiceImplTest {
         assertEquals(recipes.size(), 2);
         verify(recipeRepository, times(2)).findAll();
     }
+
+    @Test
+    void testDeleteById() throws Exception {
+        Long idToDelete = 2L;
+        recipeService.deleteById(idToDelete);
+
+        verify(recipeRepository, times(1)).deleteById(anyLong());
+    }
+
 }

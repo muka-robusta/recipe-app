@@ -28,6 +28,10 @@ public class IngredientEntityToCommand implements Converter<Ingredient, Ingredie
         ingredientCommand.setDescription(ingredient.getDescription());
         ingredientCommand.setUnitOfMeasure(unitOfMeasureConverter.convert(ingredient.getUom()));
         ingredientCommand.setAmount(ingredient.getAmount());
+
+        if (ingredient.getRecipe() != null)
+            ingredientCommand.setRecipeId(ingredient.getRecipe().getId());
+
         return ingredientCommand;
     }
 }
