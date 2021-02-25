@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -9,6 +9,30 @@
 
 </head>
 <body>
-
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <div class="panel-group">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h1 class="panel-title">Upload a new image to recipe</h1>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <form action="http://localhost" method="post" enctype="multipart/form-data"
+                                          th:action="@{'/recipe/' + ${recipe.getId()} + '/image'}">
+                                        <label class="control-label">Select file</label>
+                                        <input id="image_file" name="image_file" type="file" class="file">
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

@@ -52,6 +52,8 @@ public class RecipeEntityToCommand implements Converter<Recipe, RecipeCommand> {
                     .forEach(ingredient -> recipeCommand.getIngredients()
                             .add(ingredientConverter.convert(ingredient)));
 
+        recipeCommand.setImage(recipe.getImage());
+
         return recipeCommand;
     }
 }
