@@ -72,13 +72,4 @@ public class RecipeController {
 
     }
 
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(NumberFormatException.class)
-    public ModelAndView handleInvalidIdValue() {
-        log.error("Invalid path variable type");
-        final ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("error/400error");
-        return modelAndView;
-    }
-
 }
