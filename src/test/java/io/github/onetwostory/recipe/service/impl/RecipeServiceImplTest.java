@@ -80,4 +80,11 @@ class RecipeServiceImplTest {
         verify(recipeRepository, times(1)).deleteById(anyLong());
     }
 
+    @Test
+    void getRecipeTestIdNotFound() {
+        final Optional<Recipe> empty = Optional.empty();
+        when(recipeRepository.findById(anyLong())).thenReturn(empty);
+        final Recipe recipeById = recipeService.findById(1L);
+
+    }
 }

@@ -4,6 +4,7 @@ import io.github.onetwostory.recipe.commands.IngredientCommand;
 import io.github.onetwostory.recipe.commands.RecipeCommand;
 import io.github.onetwostory.recipe.converters.RecipeCommandToEntity;
 import io.github.onetwostory.recipe.converters.inverse.RecipeEntityToCommand;
+import io.github.onetwostory.recipe.exceptions.NotFoundException;
 import io.github.onetwostory.recipe.model.Ingredient;
 import io.github.onetwostory.recipe.model.Recipe;
 import io.github.onetwostory.recipe.repositories.RecipeRepository;
@@ -51,7 +52,7 @@ public class RecipeServiceImpl implements RecipeService {
         Optional<Recipe> recipeOptional = recipeRepository.findById(id);
 
         if (recipeOptional.isEmpty())
-            throw new RuntimeException("Recipe Not Found");
+            throw new NotFoundException(String.format("Recipe not found -> %s", id));
 
         return recipeOptional.get();
     }

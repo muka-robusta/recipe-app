@@ -1,12 +1,14 @@
 package io.github.onetwostory.recipe.controllers;
 
 import io.github.onetwostory.recipe.commands.RecipeCommand;
-import io.github.onetwostory.recipe.model.Recipe;
+import io.github.onetwostory.recipe.exceptions.NotFoundException;
 import io.github.onetwostory.recipe.service.RecipeService;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 @Log4j2
 @Controller
@@ -21,7 +23,7 @@ public class RecipeController {
     @GetMapping("/recipe/show/{id}")
     public String showById(@PathVariable String id, Model model) {
         log.info(String.format("Accessing recipe by id -> %s", id));
-        model.addAttribute("recipe", recipeService.findById(Long.parseLong(id.trim())));
+        model.addAttribute("recipe", recipeService.findById(Long.valueOf(id)));
 
         return "recipe/show";
     }
@@ -52,6 +54,31 @@ public class RecipeController {
         log.info(String.format("Deleting request by id -> %s", id));
         recipeService.deleteById(Long.valueOf(id));
         return "redirect:/";
+    }
+
+    // Error Handlers
+
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(NotFoundException.class)
+    public ModelAndView handleNotFound(Exception exception) {
+        log.error("Handling not found exception");
+        log.error(exception.getMessage());
+
+        final ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("error/404error");
+        modelAndView.addObject("exception", exception);
+
+        return modelAndView;
+
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(NumberFormatException.class)
+    public ModelAndView handleInvalidIdValue() {
+        log.error("Invalid path variable type");
+        final ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("error/400error");
+        return modelAndView;
     }
 
 }

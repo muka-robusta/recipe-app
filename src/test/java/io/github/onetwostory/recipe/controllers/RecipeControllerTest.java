@@ -32,6 +32,7 @@ class RecipeControllerTest {
 
  */
 
+import io.github.onetwostory.recipe.exceptions.NotFoundException;
 import io.github.onetwostory.recipe.model.Recipe;
 import io.github.onetwostory.recipe.service.RecipeService;
 import org.junit.jupiter.api.BeforeEach;
@@ -85,5 +86,17 @@ public class RecipeControllerTest {
                 .andExpect(view().name("redirect:/"));
 
         verify(recipeService, times(1)).deleteById(anyLong());
+    }
+
+    @Test
+    void testGetRecipeNotFound() throws Exception {
+        final Recipe recipe = new Recipe();
+        recipe.setId(1L);
+
+        when(recipeService.findById(anyLong())).thenThrow(NotFoundException.class);
+
+        mockMvc.perform(get("/recipe/1/show"))
+                .andExpect(status().isNotFound());
+
     }
 }
